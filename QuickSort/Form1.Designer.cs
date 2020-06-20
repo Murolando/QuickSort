@@ -32,6 +32,7 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.insertText = new System.Windows.Forms.TextBox();
             this.sortBut = new System.Windows.Forms.Button();
             this.openBut = new System.Windows.Forms.Button();
@@ -43,7 +44,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.RandButton = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.mainChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // insertText
@@ -91,20 +94,23 @@
             series1.BorderWidth = 2;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Color = System.Drawing.Color.Red;
+            series1.Color = System.Drawing.Color.LimeGreen;
             series1.Legend = "Legend1";
-            series1.Name = "N^2";
-            series2.BorderWidth = 2;
+            series1.Name = "Кол-во Операций";
+            series1.XValueMember = "Элементы";
+            series1.YValueMembers = "Время";
+            series1.YValuesPerPoint = 4;
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series2.Color = System.Drawing.Color.LimeGreen;
             series2.Legend = "Legend1";
-            series2.Name = "Кол-во Операций";
-            series2.XValueMember = "Элементы";
-            series2.YValueMembers = "Время";
-            series2.YValuesPerPoint = 4;
+            series2.Name = "X^2";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series3.Legend = "Legend1";
+            series3.Name = "NlogN";
             this.mainChart.Series.Add(series1);
             this.mainChart.Series.Add(series2);
+            this.mainChart.Series.Add(series3);
             this.mainChart.Size = new System.Drawing.Size(439, 268);
             this.mainChart.TabIndex = 3;
             this.mainChart.Text = "chart1";
@@ -157,7 +163,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(465, 139);
+            this.label3.Location = new System.Drawing.Point(609, 154);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(179, 17);
             this.label3.TabIndex = 8;
@@ -183,11 +189,29 @@
             this.RandButton.UseVisualStyleBackColor = true;
             this.RandButton.Click += new System.EventHandler(this.RandButton_Click);
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(376, 106);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(70, 20);
+            this.numericUpDown1.TabIndex = 11;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 454);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.RandButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -204,6 +228,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mainChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,6 +247,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button RandButton;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 

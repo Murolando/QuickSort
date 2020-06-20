@@ -21,37 +21,21 @@ namespace QuickSort
 
 
 
-        #region сортировка
-        double h = 1, x = 0, y, h1=1 , x1=0, y1;
-        //swap
-        public void Swap(long[]mas,long ind1,long ind2)
-        {
-            long temp = mas[ind1];
-            mas[ind1] = mas[ind2];
-            mas[ind2] = temp;
-        }
+        
+        double x1=0, y1 , x2=0, y2, x3=0, y3;
+       
+        //Рекурсивный вызов самой сортировки
         public void Quick_Sort(long[] mas,long low, long high)
         {
-            y = time.ElapsedTicks ;
-            mainChart.Series[1].Points.AddXY(x, y);
-            x += h;
-
-            y1 = x1 * x1;
-            mainChart.Series[0].Points.AddXY(x1, y1);
-            x1 += h1;
-
-
-
-
-
             if (low < high)
-            {
+            { 
                 long q = Partition(mas, low, high);
-
+                mainChart.Series[0].Points.AddXY(x1, y1);
                 Quick_Sort(mas, low, q - 1);
                 Quick_Sort(mas, q + 1, high);
             }
         }
+        //Переставление элементов
         public long Partition(long[]mas, long low, long high)
         {
             long pivot = mas[high];
@@ -59,8 +43,18 @@ namespace QuickSort
             long d;
             for (long j = low; j <= high-1; j++)
             {
+                x2++;
+                y2 = x2 * x2;
+                x3++;
+                y3 = x3 * Math.Log(x3,2);
+                x1 ++;
+                y1 = time.ElapsedTicks;
+                mainChart.Series[0].Points.AddXY(x1, y1);
+                mainChart.Series[1].Points.AddXY(x2, y2);
+                mainChart.Series[2].Points.AddXY(x3, y3);
                 if (mas[j] <= pivot)
                 {
+             
                     i ++;
                     //swap
                     Swap(mas, i, j);
@@ -70,7 +64,13 @@ namespace QuickSort
             Swap(mas,i+1,high);
             return (i+1);     
         }
-        #endregion
+        //swap
+        public void Swap(long[] mas, long ind1, long ind2)
+        {
+            long temp = mas[ind1];
+            mas[ind1] = mas[ind2];
+            mas[ind2] = temp;
+        }
 
 
         Stopwatch time = new Stopwatch();
@@ -85,6 +85,8 @@ namespace QuickSort
         {
             mainChart.Series[0].Points.Clear();
             mainChart.Series[1].Points.Clear();
+            mainChart.Series[2].Points.Clear();
+            mainChart.Series[0].Points.AddXY(0, 0);
             char[] revmove = { ' ', '\n' };
             string[] str = insertText.Text.Split(revmove);
             long[] rez = new long[str.Length];
@@ -92,13 +94,13 @@ namespace QuickSort
             {
                 for (int i = 0; i < str.Length; i++)
                     rez[i] = long.Parse(str[i]);
-                time.Start();
+               
             }
             catch
             {
                 MessageBox.Show("Неправильный формат ввода");
             }
-          
+            time.Start();
             Quick_Sort(rez,0,rez.Length-1);
             time.Stop();
             timeText.Text ="Ticks " + time.ElapsedTicks.ToString();
@@ -107,11 +109,10 @@ namespace QuickSort
             //string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds);
             //timeText.Text += "\n RunTime "+ elapsedTime ;
             time.Reset();
-            h = 1;
-            x = 0;
             x1 = 0;
-            h1 = 1;
-         
+            x2 = 0;
+            x3 = 0;
+
             // mainChart.Series[1].Dispose();
             insertBack(rez);
 
@@ -142,7 +143,8 @@ namespace QuickSort
         private void RandButton_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            int n = rnd.Next(1, 1000);
+            //  int n = rnd.Next(1, 1000);
+            decimal n = numericUpDown1.Value;
             string line = null;
             for (int i = 0; i < n - 1; i++)
             {
